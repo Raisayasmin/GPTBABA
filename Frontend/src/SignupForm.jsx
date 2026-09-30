@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./Form.css";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+const API_URL = import.meta.env.VITE_API_URL
 
 
 export default function SignupForm() {
@@ -27,7 +28,8 @@ export default function SignupForm() {
     try{
       const response = await axios({
         method : "POST",
-        url :"http://localhost:8080/api/signup",
+        // url :"http://localhost:8080/api/signup",
+        url :`${API_URL}/api/signup`,
         data : {
            name : name,
         email : email,

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Form.css";
+const API_URL = import.meta.env.VITE_API_URL
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -22,7 +23,8 @@ export default function LoginForm() {
  setError("");
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:8080/api/login", {
+      // const res = await fetch("http://localhost:8080/api/login", {
+      const res = await fetch(`${API_URL}/api/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

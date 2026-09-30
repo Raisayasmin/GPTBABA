@@ -3,6 +3,7 @@ import "./Sidebar.css";
 import { MyContext } from "./MyContext";
 import { v1 as uuidv1 } from "uuid";
 import authFetch from "./authFetch.js";
+const API_URL = import.meta.env.VITE_API_URL
 
 function Sidebar() {
   const {
@@ -22,7 +23,8 @@ function Sidebar() {
       const token = localStorage.getItem("token");
       if(!token) return;
     
-      const response = await authFetch("http://localhost:8080/api/thread");
+      // const response = await authFetch("http://localhost:8080/api/thread");
+      const response = await authFetch(`${API_URL}/api/thread`);
       const res = await response.json();
       const filterData = res.map((thread) => ({
         threadId: thread.threadId,
@@ -50,9 +52,13 @@ function Sidebar() {
     setCurrThreadId(newThreadId);
     try {
     
-      const response = await authFetch(
-        `http://localhost:8080/api/thread/${newThreadId}`
+      // const response = await authFetch(
+      //   `http://localhost:8080/api/thread/${newThreadId}`
+      // );
+       const response = await authFetch(
+        `${API_URL}/api/thread/${newThreadId}`
       );
+
       const res = await response.json();
       console.log(res);
       setPrevChats(res);
@@ -67,7 +73,8 @@ function Sidebar() {
     setCurrThreadId(newThreadId);
     try {
       const response = await authFetch(
-        `http://localhost:8080/api/thread/${newThreadId}`,
+        // `http://localhost:8080/api/thread/${newThreadId}`,
+         `${API_URL}/api/thread/${newThreadId}`,
         {
           method: "DELETE",
         },

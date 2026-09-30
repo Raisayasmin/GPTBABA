@@ -6,6 +6,7 @@ import { ClipLoader } from "react-spinners";
 import Chat from "./Chat";
 import { useNavigate } from "react-router-dom";
 import authFetch from "./authFetch.js";
+const API_URL = import.meta.env.VITE_API_URL
 
 
 function ChatWindow() {
@@ -37,7 +38,8 @@ function ChatWindow() {
       }),
     };
     try {
-      const response = await authFetch("http://localhost:8080/api/chat", options);
+      // const response = await authFetch("http://localhost:8080/api/chat", options);
+      const response = await authFetch('${API_URL}/api/chat', options);
       const res = await response.json();
 
       console.log(res);
@@ -69,7 +71,8 @@ function ChatWindow() {
 
 const handleLogout = async () => {
   try {
-    await authFetch("http://localhost:8080/api/logout", {
+    // await authFetch("http://localhost:8080/api/logout", {
+    await authFetch(`${API_URL}/api/logout`, {
       method: "POST",
     });
     
